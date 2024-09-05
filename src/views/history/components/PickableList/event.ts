@@ -8,6 +8,10 @@ export function useIsKeyPressed() {
 		_setHeldKeys(keys);
 	};
 
+	const clearHeldKeys = useCallback(() => {
+		setHeldKeys([]);
+	}, []);
+
 	const checkKeyIsPressed = useCallback(
 		(key: string) => heldKeys?.includes(key),
 		[heldKeys]
@@ -24,9 +28,8 @@ export function useIsKeyPressed() {
 		function keyupEventHandler(e: KeyboardEvent) {
 			const currentHeldKeys = heldKeysRef.current;
 			if (currentHeldKeys.includes(e.key)) {
-				const index = currentHeldKeys.indexOf(e.key);
-				currentHeldKeys.splice(index, 1);
-				setHeldKeys([...currentHeldKeys]);
+				const _currentHeldKeys = currentHeldKeys.filter((item) => item !== e.key);
+				setHeldKeys([..._currentHeldKeys]);
 			}
 		}
 		document.addEventListener("keydown", keydownEventHandler);
@@ -37,5 +40,5 @@ export function useIsKeyPressed() {
 		};
 	}, []);
 
-	return { checkKeyIsPressed };
+	return { checkKeyIsPressed, clearHeldKeys };
 }

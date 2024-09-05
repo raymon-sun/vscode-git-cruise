@@ -1,5 +1,7 @@
 # Git History
 
+## Fork from https://github.com/raymon-sun/vscode-git-history
+
 [English](README.md) | 简体中文
 
 [![Version](https://vsmarketplacebadge.apphb.com/version/guodongsun.vscode-git-cruise.svg)](https://marketplace.visualstudio.com/items?itemName=guodongsun.vscode-git-cruise)

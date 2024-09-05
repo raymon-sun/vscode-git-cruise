@@ -9,11 +9,19 @@ import { ChangeTreeView } from "./views/changes/ChangeTreeView";
 
 @injectable()
 export class DisposableController {
+	webviewProvider: HistoryWebviewViewProvider;
+
 	constructor(
-		private webviewProvider: HistoryWebviewViewProvider,
+		webviewProvider: HistoryWebviewViewProvider,
 		private changeTreeView: ChangeTreeView,
 		private GitStatusFileDecorationProvider: GitStatusFileDecorationProvider
-	) {}
+	) {
+		this.webviewProvider = webviewProvider;
+	}
+
+	getWebviewInstance() {
+		return this.webviewProvider.getWebview();
+	}
 
 	createDisposables() {
 		return [

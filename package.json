@@ -1,6 +1,6 @@
 {
-	"name": "vscode-git-cruise",
-	"displayName": "Git History",
+	"name": "xm-vscode-git-cruise",
+	"displayName": "Xiaomo Git History",
 	"description": "Git history panel in your VS Code",
 	"keywords": [
 		"git",
@@ -14,11 +14,11 @@
 		"flow",
 		"tag"
 	],
-	"version": "0.2.4",
+	"version": "0.2.5",
 	"license": "MIT",
 	"icon": "assets/logo/1x.png",
-	"repository": "https://github.com/raymon-sun/vscode-git-history",
-	"publisher": "GuodongSun",
+	"repository": "https://github.com/zhangmo8/vscode-git-history",
+	"publisher": "zhangmo8",
 	"engines": {
 		"vscode": "^1.56.0"
 	},
@@ -67,6 +67,18 @@
 			},
 			{
 				"category": "Git History",
+				"command": "git-history.history.filter",
+				"title": "Git History",
+				"icon": "$(filter)"
+			},
+			{
+				"category": "Git History",
+				"command": "git-history.history.clear",
+				"title": "Clear Selection",
+				"icon": "$(clear-all)"
+			},
+			{
+				"category": "Git History",
 				"command": "git-history.history.reset",
 				"title": "Reset History",
 				"icon": "$(discard)"
@@ -88,12 +100,6 @@
 				"command": "git-history.history.switch.branch",
 				"title": "Select Reference",
 				"icon": "$(git-branch)"
-			},
-			{
-				"category": "Git History",
-				"command": "git-history.history.filter",
-				"title": "Git History",
-				"icon": "$(filter)"
 			}
 		],
 		"menus": {
@@ -105,6 +111,11 @@
 				},
 				{
 					"command": "git-history.history.reset",
+					"when": "view =~ /git-history.history/",
+					"group": "navigation@4"
+				},
+				{
+					"command": "git-history.history.clear",
 					"when": "view =~ /git-history.history/",
 					"group": "navigation@4"
 				},
@@ -171,6 +182,7 @@
 		"webpack-cli": "^4.9.1"
 	},
 	"dependencies": {
+		"@babel/types": "^7.23.4",
 		"@use-gesture/react": "^10.1.3",
 		"@vscode/codicons": "^0.0.30",
 		"@vscode/webview-ui-toolkit": "^1.0.0",

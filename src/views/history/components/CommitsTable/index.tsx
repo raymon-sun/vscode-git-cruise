@@ -139,9 +139,8 @@ const CommitsTableInner: FC<{ totalWidth: number }> = ({ totalWidth }) => {
 									className={style["ref-button"]}
 									data-button
 									appearance="icon"
-									title={`Select Branch/Reference · ${
-										options.ref || "All"
-									}`}
+									title={`Select Branch/Reference · ${options.ref || "All"
+										}`}
 									aria-label="All"
 									onClick={() => onSelectReference()}
 								>
@@ -159,15 +158,14 @@ const CommitsTableInner: FC<{ totalWidth: number }> = ({ totalWidth }) => {
 											onClick={() => onFilter(prop)}
 										>
 											<span
-												className={`codicon codicon-filter${
-													options[
-														filterLogOption as
-															| "authors"
-															| "keyword"
-													]?.length
-														? "-filled"
-														: ""
-												}`}
+												className={`codicon codicon-filter${options[
+													filterLogOption as
+													| "authors"
+													| "keyword"
+												]?.length
+													? "-filled"
+													: ""
+													}`}
 											/>
 										</VSCodeButton>
 									)}

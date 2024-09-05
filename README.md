@@ -1,5 +1,7 @@
 # Git History
 
+## Fork from https://github.com/raymon-sun/vscode-git-history
+
 English | [简体中文](./README.zh-CN.md)
 
 The extension provides a visual git history panel to help you browse git history easily.

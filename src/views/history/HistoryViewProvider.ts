@@ -7,6 +7,7 @@ import {
 	Webview,
 	WebviewView,
 	WebviewViewProvider,
+	window,
 } from "vscode";
 
 import { TYPES } from "../../container/types";
@@ -17,10 +18,12 @@ import { linksMap } from "./data/link";
 
 @injectable()
 export class HistoryWebviewViewProvider implements WebviewViewProvider {
+	webview?: Webview;
+
 	constructor(
 		@inject(TYPES.ExtensionContext) private context: ExtensionContext,
 		private source: Source
-	) {}
+	) { }
 
 	resolveWebviewView(webviewView: WebviewView) {
 		const { extensionUri } = this.context;
@@ -36,7 +39,16 @@ export class HistoryWebviewViewProvider implements WebviewViewProvider {
 		webviewView.webview.html = this.generateWebviewContent(
 			webviewView.webview
 		);
+		this.webview = webviewView.webview;
 		this.registerRequestHandlers(webviewView.webview);
+	}
+
+	getWebview() {
+		if (!this.webview) {
+			window.showErrorMessage("webview not initialized");
+			return;
+		}
+		return this.webview;
 	}
 
 	generateWebviewContent(webview: Webview) {

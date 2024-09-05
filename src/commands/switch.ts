@@ -111,9 +111,8 @@ export function getSwitchCommandsDisposable() {
 				...otherRefs,
 			].map(({ type, name, hash }) => ({
 				label: `$(${REF_TYPE_DETAIL_MAP[type]?.icon}) ${name}`,
-				description: `${
-					REF_TYPE_DETAIL_MAP[type]?.descriptionPrefix
-				}${hash.substring(0, 8)}`,
+				description: `${REF_TYPE_DETAIL_MAP[type]?.descriptionPrefix
+					}${hash.substring(0, 8)}`,
 				ref: name,
 			}));
 

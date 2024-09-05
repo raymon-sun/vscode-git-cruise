@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { ReactNode, useCallback, useEffect, useRef, useState } from "react";
 import { useDrag } from "@use-gesture/react";
 import { sortedIndex } from "lodash";
 import classNames from "classnames";
@@ -52,7 +52,24 @@ const PickableList = <T extends Record<string, any>>(
 	const [itemYs, setItemYs] = useState<number[]>([]);
 	const [dragStartIndex, setDragStartIndex] =
 		useState<number>(INDEX_PLACEHOLDER);
-	const { checkKeyIsPressed } = useIsKeyPressed();
+	const { checkKeyIsPressed, clearHeldKeys } = useIsKeyPressed();
+
+	useEffect(() => {
+		window.addEventListener('message', clearSelectionKeys);
+
+		return () => {
+			window.removeEventListener('message', clearSelectionKeys);
+		};
+	}, []);
+
+	const clearSelectionKeys = useCallback((e: MessageEvent) => {
+		const { data } = e;
+
+		if (data.type === 'clear') {
+			setPickedItems({});
+			clearHeldKeys();
+		}
+	}, []);
 
 	useEffect(() => {
 		if (typeof locationIndex !== "number") {
@@ -62,7 +79,7 @@ const PickableList = <T extends Record<string, any>>(
 		scrollToIndex(locationIndex || 0, { align: "center" });
 	}, [scrollToIndex, locationIndex]);
 
-	const dragBind = useDrag(({ type, xy, target }) => {
+	const dragBind = useDrag((({ type, xy, target }) => {
 		const [x, y] = xy;
 
 		const existedItems =
@@ -151,7 +168,7 @@ const PickableList = <T extends Record<string, any>>(
 
 			setPickedItems(currentItems);
 		}
-	});
+	}));
 
 	return (
 		<div
